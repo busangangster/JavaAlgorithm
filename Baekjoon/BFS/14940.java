@@ -9,12 +9,12 @@ class P14940 {
 	static boolean[][] visited;
 	
 	public static void main(String[] args) throws Exception {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
-    StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		
-    n = Integer.parseInt(st.nextToken());
-    m = Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
 
 		arr = new int[n][m]; // 지도
 		visited = new boolean[n][m]; // 방문여부 확인
@@ -24,28 +24,28 @@ class P14940 {
 		for (int i=0;i<n;i++) {
 			st = new StringTokenizer(br.readLine()," ");
 			for (int j=0;j<m;j++) {
-        arr[i][j] = Integer.parseInt(st.nextToken());
-        if (arr[i][j] == 2) {
-          x = i;
-          y = j;
-        } else if (arr[i][j] == 0) {
-          visited[i][j] = true; // 좌표의 값이 0이면 가지 못하는 곳이기에 방문여부를 True로 초기화
-        }
+				arr[i][j] = Integer.parseInt(st.nextToken());
+				if (arr[i][j] == 2) {
+					x = i;
+					y = j;
+				} else if (arr[i][j] == 0) {
+					visited[i][j] = true; // 좌표의 값이 0이면 가지 못하는 곳이기에 방문여부를 True로 초기화
+				}
 			}
 		}
 
-    BFS(x,y); 
+    	BFS(x,y); 
 
-    for (int i=0;i<n;i++) {
-      for (int j=0;j<m;j++) {
-        if (!visited[i][j]) {
-          ans[i][j] = -1 ;
-        }
-        sb.append(ans[i][j]+" ");
-      }
-      sb.append("\n");
-    }
-    System.out.println(sb);
+		for (int i=0;i<n;i++) {
+			for (int j=0;j<m;j++) {
+				if (!visited[i][j]) {
+					ans[i][j] = -1 ;
+				}
+				sb.append(ans[i][j]+" ");
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb);
 	}
   
 	public static void BFS(int x,int y) {
@@ -54,7 +54,7 @@ class P14940 {
 		visited[x][y] = true;
 		
 		while (!dq.isEmpty()) {
-      int[] current = dq.poll();
+      		int[] current = dq.poll();
 			
 			for (int i=0;i<4;i++) {
 				int xx = current[0] + nx[i];
@@ -62,8 +62,8 @@ class P14940 {
 				
 				if (0<= xx && xx <n && 0<= yy && yy < m && !visited[xx][yy] && arr[xx][yy] == 1) {
 					ans[xx][yy] = ans[current[0]][current[1]] + 1;
-          visited[xx][yy] = true;
-          dq.add(new int[] {xx,yy});
+          			visited[xx][yy] = true;
+          			dq.add(new int[] {xx,yy});
 				}
 			}
 		}
