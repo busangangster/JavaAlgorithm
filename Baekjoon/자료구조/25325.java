@@ -6,7 +6,7 @@ class P25325 {
  public static void main(String[] args) throws Exception{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     HashMap<String, Integer> map = new HashMap<>();
-    StringBuilder sb = new StringBuilder();
+
 
     int n = Integer.parseInt(br.readLine());
 
@@ -34,9 +34,6 @@ class P25325 {
         }
     });
 
-    // map.forEach((key,value) -> {
-    //     System.out.println(key+" "+value);
-    // });
     for(String key : mapSet) {
         System.out.println(key + " " + map.get(key));
     }
