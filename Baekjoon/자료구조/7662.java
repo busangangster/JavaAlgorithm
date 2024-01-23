@@ -25,8 +25,8 @@ class P7662 {
                         if (v == 1) {
                             int tmp = tm.lastKey(); // tree의 최댓값
                             int cnt = tm.get(tmp);
-                            if (cnt == 1) tm.remove(tmp);
-                            else tm.put(tmp,cnt-1);
+                            if (cnt == 1) tm.remove(tmp); // 해당 수의 개수가 한개면, 트리에서 삭제
+                            else tm.put(tmp,cnt-1); // 한개 이상이면 갯수 1 감소 
                             
                         } else {
                             int tmp = tm.firstKey(); // 트리의 최솟값
