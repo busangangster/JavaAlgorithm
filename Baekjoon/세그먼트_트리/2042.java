@@ -17,14 +17,14 @@ class P2042 {
             tree = new long[treeSize];
         }
 
-        public static long init(long[] tree, int node, int start, int end) {
+        public  long init(long[] tree, int node, int start, int end) {
             if (start == end) return tree[node] = arr[start];
 
             int mid = (start+end) / 2;
             return tree[node] = init(tree,node*2,start,mid) + init(tree,node*2+1,mid+1,end);
         }
 
-        public static void update(long[] tree, int node, int start, int end, int idx, long diff) {
+        public  void update(long[] tree, int node, int start, int end, int idx, long diff) {
             if (idx < start || idx > end) return;
 
             tree[node] += diff;
@@ -36,7 +36,7 @@ class P2042 {
             }
         }
 
-        public static long sum(long[] tree, int node, int start, int end, int left, int right) {
+        public  long sum(long[] tree, int node, int start, int end, int left, int right) {
             if (left > end || right < start) return 0;
 
             if (left <= start && end <= right) {
@@ -78,7 +78,6 @@ class P2042 {
              arr[b] = c;
         }
         else {
-            // sgTree.sum(sgTree.tree,1,1,N,b,(int) c);
             sb.append(sgTree.sum(sgTree.tree,1,1,N,b,(int) c)).append("\n");
         }
     }
