@@ -1,6 +1,5 @@
 package Baekjoon.기하학;
 import java.io.*;
-import java.util.*;
 
 class P27323 {
     public static void main(String[] args) throws Exception{
