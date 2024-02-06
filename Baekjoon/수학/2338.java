@@ -1,5 +1,4 @@
 package Baekjoon.수학;
-import java.util.*;
 import java.io.*;
 import java.math.BigInteger;
 

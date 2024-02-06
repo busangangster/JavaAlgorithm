@@ -53,13 +53,13 @@ class P10999 {
 
     // 느리게 갱신되는 세그먼트 트리 
     public static void wait(int node, int start, int end) {
-        if (lazy[node] != 0) {
-            if (start != end) {
-                lazy[node*2] += lazy[node];
+        if (lazy[node] != 0) { //lazy가 등록되어 있는 경우
+            if (start != end) { // 해당 노드가 리프노드가 아닌경우
+                lazy[node*2] += lazy[node]; // 자식들에게 lazy를 물려줌
                 lazy[node*2+1] += lazy[node];
             }
-            tree[node] += lazy[node] *(end-start+1);
-            lazy[node] = 0;
+            tree[node] += lazy[node] *(end-start+1); // 노드 업데이트 = 업데이트 값 * 해당 자식노드의 총 개수
+            lazy[node] = 0; // 업데이트 완료 후, 해당 노드 값 삭제 
         }
     }
 
