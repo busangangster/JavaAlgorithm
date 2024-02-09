@@ -22,14 +22,12 @@ class P14400 {
 
         int con_x = x_pos.get(N/2);
         int con_y = y_pos.get(N/2);
-        long ans1 = 0;
-        long ans2 = 0;
+        long ans = 0;
 
         for (int i=0; i<N; i++) {
-            ans1 += Math.abs(con_x - x_pos.get(i));
-            ans2 += Math.abs(con_y - y_pos.get(i));
+            ans += Math.abs(con_x - x_pos.get(i)) + Math.abs(con_y - y_pos.get(i)); 
         }
-        sb.append(ans1+ans2);
+        sb.append(ans);
         System.out.println(sb);
     }
 }
