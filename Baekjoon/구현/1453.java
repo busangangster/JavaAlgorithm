@@ -8,7 +8,7 @@ class P1453 {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         int cnt = 0;
-        int[] arr = new int[n+1];
+        int[] arr = new int[101];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i=0;i<n;i++) {
             int k = Integer.parseInt(st.nextToken());
