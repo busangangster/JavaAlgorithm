@@ -26,8 +26,6 @@ class P2631 {
 
         sb.append(N - Arrays.stream(dp).max().getAsInt());
         System.out.println(sb);
-        
-
 
     }
 }
