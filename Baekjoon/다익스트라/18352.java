@@ -71,10 +71,5 @@ class Node{
 	public Node(int idx, int cost) {
 		this.idx = idx;
 		this.cost = cost;
-	}
-	@Override
-	public String toString() {
-		return "Node [idx=" + idx + ", cost=" + cost + "]";
-	}
-	
+	}	
 }
