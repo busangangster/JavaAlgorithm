@@ -1,6 +1,6 @@
 package Baekjoon.분할정복;
 import java.io.*;
-import java.util.*;
+
 
 class P1992 {
     static int N;

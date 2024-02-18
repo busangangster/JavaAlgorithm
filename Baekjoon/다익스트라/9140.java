@@ -1,8 +1,9 @@
+package Baekjoon.다익스트라;
 import java.util.*;
 import java.io.*;
 
 
-class Main {
+class P9140 {
   static int N,M,S,E,INF;
   static ArrayList<ArrayList<Node>> graph;
   static int[] min_dis;
