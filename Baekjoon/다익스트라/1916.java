@@ -1,7 +1,8 @@
+package Baekjoon.다익스트라;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class P1916 {
 	static int N,M,a,b,INF;
 	static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
 	static int[] min_dis;
