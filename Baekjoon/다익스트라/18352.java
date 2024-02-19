@@ -1,7 +1,8 @@
+package Baekjoon.다익스트라;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class P18352 {
 	static int N,M,K,X,INF;
 	static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
 	static int[] min_dis;
@@ -51,14 +52,14 @@ public class Main {
 		while (!pq.isEmpty()) {
 			Node cur = pq.poll();
 			
-			if (min_dis[cur.idx] < cur.cost) continue;
+			if (min_dis[cur.node] < cur.cost) continue;
 			
-			for (int i=0; i< graph.get(cur.idx).size(); i++) {
-				Node next = graph.get(cur.idx).get(i);
+			for (int i=0; i< graph.get(cur.node).size(); i++) {
+				Node next = graph.get(cur.node).get(i);
 				
-				if (min_dis[next.idx] > cur.cost + next.cost) {
-					min_dis[next.idx] = cur.cost + next.cost;
-					pq.offer(new Node(next.idx, cur.cost+next.cost));
+				if (min_dis[next.node] > cur.cost + next.cost) {
+					min_dis[next.node] = cur.cost + next.cost;
+					pq.offer(new Node(next.node, cur.cost+next.cost));
 				}
 			}
 		}
@@ -66,10 +67,10 @@ public class Main {
 }
 
 class Node{
-	int idx;
+	int node;
 	int cost; 
-	public Node(int idx, int cost) {
-		this.idx = idx;
+	public Node(int node, int cost) {
+		this.node = node;
 		this.cost = cost;
 	}	
 }

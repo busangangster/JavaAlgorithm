@@ -1,17 +1,24 @@
-class prac {
-    public static void main(String[] args) {
-        int[] start = {1,1};
-        int[] end = {2,2};
+import java.net.*;
+import java.util.StringTokenizer;
+import java.io.*;
 
-        int a = Math.abs(start[0] - end[0]);
-        int b = Math.abs(start[1] - end[1]);
+public class prac {
 
-        double r = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st;
 
-        double radian = Math.atan2(b,a);
+		int N = Integer.parseInt(br.readLine());
 
-        System.out.println(radian);
-        // double angle = 
-        System.out.println(Math.toDegrees(radian));
-    }
+		for (int i=0; i<N; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b =  Integer.parseInt(st.nextToken());
+			int x = Integer.parseInt(st.nextToken());
+
+			sb.append(a*(x-1) +b).append("\n");
+		}
+		System.out.println(sb);
+	}
 }
