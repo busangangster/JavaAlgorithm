@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class P29634 {
 	static int N,M;
 	static char[][] arr;
 	static boolean[][] visited;

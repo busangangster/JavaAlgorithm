@@ -1,7 +1,8 @@
+
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class P30106 {
 	static int N,M,K;
 	static int[][] arr;
 	static boolean[][] visited;
