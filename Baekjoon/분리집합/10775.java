@@ -1,5 +1,4 @@
 package Baekjoon.분리집합;
-import java.util.*;
 import java.io.*;
 
 class P10775 {
@@ -7,7 +6,6 @@ class P10775 {
     static int[] parent;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
         G = Integer.parseInt(br.readLine());
         P = Integer.parseInt(br.readLine());
@@ -23,10 +21,8 @@ class P10775 {
 
             union(gate,gate-1);
             cnt++;
-            System.out.println(Arrays.toString(parent));
         }
         System.out.println(cnt);
-
     }
 
     public static void makeSet() {
