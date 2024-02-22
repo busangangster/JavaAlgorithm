@@ -1,7 +1,8 @@
+package Baekjoon.최소신장트리;
 import java.util.*;
 import java.io.*;
 
-public class prac {
+class P21924 {
     static int N,M;
     static ArrayList<ArrayList<Node>> graph;
     static boolean[] visited;
@@ -79,4 +80,3 @@ class Node implements Comparable<Node>{
         return this.cost - o.cost;
     }
 }
-
