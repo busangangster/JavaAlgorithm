@@ -4,7 +4,7 @@ import java.util.*;
 
 class P2252 {
     static int N,M;
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
+    static ArrayList<ArrayList<Integer>> graph;
     static int[] inDegrees;
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws Exception {
@@ -15,6 +15,7 @@ class P2252 {
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+        graph = new ArrayList<ArrayList<Integer>>();
 
         inDegrees = new int[N+1];
 
@@ -38,7 +39,6 @@ class P2252 {
 
         for (int i=1; i<=N; i++) {
             if (inDegrees[i] == 0) {
-                inDegrees[i]--;
                 sb.append(i).append(" ");
                 q.offer(i);
             }
@@ -47,14 +47,11 @@ class P2252 {
         while (!q.isEmpty()) {
             int cur = q.poll();
 
-            ArrayList<Integer> now = graph.get(cur);
-
-            for (int i=0; i<now.size(); i++) {
-                inDegrees[now.get(i)]--;
-                if (inDegrees[now.get(i)] == 0) {
-                    inDegrees[now.get(i)]--;
-                    sb.append(now.get(i)).append(" ");
-                    q.offer(now.get(i));
+            for (int next: graph.get(cur)) {
+                inDegrees[next]--;
+                if (inDegrees[next] == 0) {
+                    sb.append(next).append(" ");
+                    q.offer(next);
                 }
             }
         }
