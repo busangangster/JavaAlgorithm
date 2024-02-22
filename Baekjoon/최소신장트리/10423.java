@@ -1,11 +1,8 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+package Baekjoon.최소신장트리;
+import java.util.*;
+import java.io.*;
 
-public class prac {
-
+class P10423 {
     static int N,M,K,ans;
     static boolean[] visited;
     static ArrayList<ArrayList<Node>> graph;
