@@ -2,81 +2,80 @@ import java.util.*;
 import java.io.*;
 
 public class prac {
-    static int N,M;
+    static int N,M,cnt;
     static ArrayList<ArrayList<Node>> graph;
     static boolean[] visited;
-    static int[] check;
-    static long total,ans;
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+public static void main(String[] args) throws Exception {
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	StringBuilder sb = new StringBuilder();
+	StringTokenizer st;
 
-        st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+	st = new StringTokenizer(br.readLine());
 
-        visited = new boolean[N+1];
-        check = new int[N+1];
-        total = 0;
+	N = Integer.parseInt(st.nextToken());
+	M = Integer.parseInt(st.nextToken());
 
-        graph = new ArrayList<ArrayList<Node>>();
+	graph = new ArrayList<ArrayList<Node>>();
+	visited = new boolean[N+1];
 
-        for (int i=0; i<=N; i++) {
-            graph.add(new ArrayList<>());
-        }
+	for (int i=0; i<=N; i++) {
+		graph.add(new ArrayList<>());
+	}
 
-        for (int i=0; i<M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int c =  Integer.parseInt(st.nextToken());
-            graph.get(a).add(new Node(b,c));
-            graph.get(b).add(new Node(a,c));
-            total += c;
-        }
-        Prim(1);
+	for (int i=0; i<M; i++) {
+		st = new StringTokenizer(br.readLine());
+		int u = Integer.parseInt(st.nextToken());
+		int v = Integer.parseInt(st.nextToken());
+		int c = Integer.parseInt(st.nextToken());
+		graph.get(u).add(new Node(v,c));
+		graph.get(v).add(new Node(u,c));
+	}
 
-        if (Arrays.stream(check).sum() == N) System.out.println(total-ans);
-        else System.out.println(-1);
+	System.out.println(graph);
+	prim(0);
+	System.out.println(cnt % 998244353);
 
     }
 
-    public static void Prim(int start) {
-        PriorityQueue<Node> pq = new PriorityQueue<Node>();
-        pq.offer(new Node(start,0));
+public static void prim(int start) {
+	PriorityQueue<Node> pq = new PriorityQueue<Node>();
+	pq.offer(new Node(start,0));
+	cnt = 0;
 
-        ans = 0;
+	while (!pq.isEmpty()) {
 
-        while (!pq.isEmpty()) {
-            Node cur = pq.poll();
+		Node cur = pq.poll();
+		System.out.println(cur);
 
-            if(visited[cur.x]) continue;
+		if (visited[cur.end]) continue;
 
-            visited[cur.x] = true;
-            ans += cur.cost;
-            check[cur.x] = 1;
+		visited[cur.end] = true;
 
-            for (Node next: graph.get(cur.x)) {
-                if (!visited[next.x]) {
-                    pq.offer(new Node(next.x, next.cost));
-                }
-            }
-
-
-        }
+		for (Node next: graph.get(cur.end)) {
+			if (!visited[next.end]) {
+				System.out.println(next);
+				cnt++;
+				pq.offer(new Node(next.end,next.cost));
+			    }
+		    }
+	    }
     }
 }
 
 class Node implements Comparable<Node>{
-    int x;
+    int end;
     int cost;
-    public Node(int x, int cost) {
-        this.x = x;
+    public Node(int end, int cost) {
+        this.end = end;
         this.cost = cost;
     }
     @Override
     public int compareTo(Node o) {
-        return this.cost - o.cost;
+	    return this.cost - o.cost;
+    }
+
+    @Override
+    public String toString() {
+    	return "Node [end=" + end + ", cost=" + cost + "]";
     }
 }
-
