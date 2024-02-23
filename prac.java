@@ -18,6 +18,8 @@ public static void main(String[] args) throws Exception {
 	graph = new ArrayList<ArrayList<Node>>();
 	visited = new boolean[N+1];
 
+    cnt = 0;
+
 	for (int i=0; i<=N; i++) {
 		graph.add(new ArrayList<>());
 	}
@@ -29,10 +31,11 @@ public static void main(String[] args) throws Exception {
 		int c = Integer.parseInt(st.nextToken());
 		graph.get(u).add(new Node(v,c));
 		graph.get(v).add(new Node(u,c));
+        cnt++;
 	}
 
 	System.out.println(graph);
-	prim(0);
+	prim(1);
 	System.out.println(cnt % 998244353);
 
     }
@@ -40,7 +43,7 @@ public static void main(String[] args) throws Exception {
 public static void prim(int start) {
 	PriorityQueue<Node> pq = new PriorityQueue<Node>();
 	pq.offer(new Node(start,0));
-	cnt = 0;
+	// cnt = 0;
 
 	while (!pq.isEmpty()) {
 
@@ -52,9 +55,9 @@ public static void prim(int start) {
 		visited[cur.end] = true;
 
 		for (Node next: graph.get(cur.end)) {
+            System.out.println(next);
 			if (!visited[next.end]) {
-				System.out.println(next);
-				cnt++;
+
 				pq.offer(new Node(next.end,next.cost));
 			    }
 		    }
