@@ -1,7 +1,8 @@
+package Baekjoon.백트래킹;
 import java.util.*;
 import java.io.*;
 
-public class prac {
+class P10819 {
     static int N,ans;
     static int[] input;
     static int[] num;
