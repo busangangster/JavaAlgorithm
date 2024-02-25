@@ -1,7 +1,9 @@
+package Baekjoon.최소신장트리;
 import java.util.*;
 import java.io.*;
 
-public class prac {
+
+class P16398 {
     static int N;
     static int[][] graph; 
     static ArrayList<ArrayList<Edge>> arr;

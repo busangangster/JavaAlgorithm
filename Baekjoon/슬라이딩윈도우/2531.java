@@ -32,7 +32,7 @@ class P2531 {
   
         int ans = cur;
   
-        for (int i = 1; i < N; i++) {
+        for (int i = 1; i < N+1; i++) { // N까지면 오답임 
   
            sushi[arr[i - 1]]--;
            if (sushi[arr[i - 1]] == 0) {

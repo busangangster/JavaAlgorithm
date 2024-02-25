@@ -93,9 +93,5 @@ class Edge implements Comparable<Edge>{
 		if (this.cost < o.cost) return -1;
 		else return 1;
 	}
-	@Override
-	public String toString() {
-		return "Edge [end=" + end + ", cost=" + cost + "]";
-	}
 	
 }
