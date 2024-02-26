@@ -1,7 +1,8 @@
+package Baekjoon.최소신장트리;
 import java.util.*;
 import java.io.*;
 
-public class prac {
+class P14950 {
     static int N,M,T,ans;
     static boolean[] visited;
     static ArrayList<ArrayList<Edge>> graph;
@@ -39,8 +40,8 @@ public class prac {
      public static void prim(int start) {
         PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
         pq.offer(new Edge(start, 0));
-        int idx = 1;
-        int cnt = 0;
+        int idx = 1; // 정복할 때마다 t씩 증가하는데, t*idx만큼 증가시키기 위한 변수 
+        int cnt = 0; // 정복한 횟수 
 
         while (!pq.isEmpty()) {
             Edge cur = pq.poll();
@@ -48,11 +49,12 @@ public class prac {
             if (visited[cur.end]) continue;
 
             visited[cur.end] = true;
-            if (cnt >= 2){
+
+            if (cnt >= 2){ // 정복 횟수가 2 이상이면, 도로의 비용을 t*idx만큼 증가한 값을 총 비용에 +
                 ans += cur.cost + (T*idx);
                 idx++;
             }
-            else {
+            else { // 아니면 기존 도로의 비용만큼만 더해줌 
                 ans += cur.cost;
             }
 
@@ -69,6 +71,7 @@ public class prac {
 class Edge implements Comparable<Edge>{
     int end;
     int cost;
+
     public Edge(int end, int cost) {
         this.end = end;
         this.cost = cost;
@@ -77,8 +80,4 @@ class Edge implements Comparable<Edge>{
     public int compareTo(Edge o){
         return this.cost - o.cost;
     }
-    
 }
-
-
-
