@@ -1,10 +1,11 @@
+package Baekjoon.BFS;
 import java.util.*;
 import java.io.*;
  
-public class swea {
+class P16933 {
     static int N,M,K,ans;
     static int[][] graph;
-    static int[][][] visited;
+    static boolean[][][] visited;
     static int[] dx = {0,1,0,-1};
     static int[] dy = {1,0,-1,0};
      
@@ -17,7 +18,6 @@ public class swea {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-        visited = new int[N][M][(K + 31) / 32 + 1];
 
         graph = new int[N][M];
 
@@ -36,8 +36,9 @@ public class swea {
 
     public static void BFS() {
         PriorityQueue<Node> q = new PriorityQueue<Node>();
+        visited = new boolean[N][M][K+1];
         q.offer(new Node(0,0,0,1,true)); // true면 낮, false면 밤. 
-        setVisited(0, 0, 0);
+        visited[0][0][0] = true;
 
         while (!q.isEmpty()) {
             Node cur = q.poll();
@@ -50,20 +51,20 @@ public class swea {
             for (int i=0; i<4; i++) {
                 int nx = cur.x + dx[i];
                 int ny = cur.y + dy[i];
-                if (check(nx,ny)) {
-                    if (!isVisited(nx,ny,cur.wall) && graph[nx][ny] == 0) {
+                if (nx >= 0 && nx < N && ny >= 0 && ny < M) {
+                    if (!visited[nx][ny][cur.wall] && graph[nx][ny] == 0) {
                         q.offer(new Node(nx,ny,cur.wall,cur.cnt+1,!cur.flag));
-                        setVisited(nx, ny, cur.wall);
+                        visited[nx][ny][cur.wall] = true;
                     }
     
-                    else if (cur.wall < K && graph[nx][ny] == 1 && !isVisited(nx,ny,cur.wall)) {
+                    else if (cur.wall < K && graph[nx][ny] == 1 && !visited[nx][ny][cur.wall+1]) {
                         if (cur.flag)  {// 낮  
                             q.offer(new Node(nx,ny,cur.wall+1,cur.cnt+1,false)); 
-                            setVisited(nx, ny, cur.wall+1);
+                            visited[nx][ny][cur.wall+1] = true;
                         }
                         else  { // 밤  
                             q.offer(new Node(nx,ny,cur.wall+1,cur.cnt+2,false));
-                            setVisited(nx, ny, cur.wall+1);
+                            visited[nx][ny][cur.wall+1] = true;
                         }
                         
                     }
@@ -74,15 +75,6 @@ public class swea {
 
     public static boolean check(int x, int y){
         return (0 <= x && x < N && 0 <= y && y < M) ;
-    }
-
-    public static boolean isVisited(int x, int y, int wall) {
-        return (visited[x][y][wall / 32] & (1 << (wall % 32))) != 0;
-    }
-
-    // 방문 여부 설정 메서드
-    public static void setVisited(int x, int y, int wall) {
-        visited[x][y][wall / 32] |= (1 << (wall % 32));
     }
 }
 
