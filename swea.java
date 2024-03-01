@@ -2,122 +2,112 @@ import java.util.*;
 import java.io.*;
  
 public class swea {
-  
-    static int N, cell[][], min_v, maxCore;
-    static int dx[] = {0,0,-1,1}; 
-    static int dy[] = {-1,1,0,0};
-    static List<Core> coreList; 
+    static int N,M,K,ans;
+    static int[][] graph;
+    static boolean[][] visited;
+    static int[] dx = {0,1,0,-1};
+    static int[] dy = {1,0,-1,0};
      
-    public static void main(String args[]) throws Exception
-    {
+    public static void main(String args[]) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
-         
-        int T = Integer.parseInt(br.readLine());
-        for(int t=1; t<=T; t++) {
-            N = Integer.parseInt(br.readLine());
-             
-            cell = new int[N][N];
-            coreList = new ArrayList<>();
+        StringTokenizer st;  
+        
+        st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
 
-            for(int i=0; i<N; i++) {
-                st = new StringTokenizer(br.readLine());
-                for(int j=0; j<N; j++) {
-                    int k = Integer.parseInt(st.nextToken());
-                    if(k==1) {
-                        cell[i][j] = k;
+        graph = new int[N][M];
+        visited = new boolean[N][M];
+        ans = Integer.MAX_VALUE;
 
-                        if(i==0 || j==0 || i==N-1 || j==N-1)
-                            continue;
-                        coreList.add(new Core(i,j));  // 행, 열
+        for (int i=0; i<N; i++) {
+            String s = br.readLine();
+            for (int j=0; j<M; j++) {
+                graph[i][j] = s.charAt(j) - '0';
+            }
+        }
+        System.out.println(Arrays.deepToString(graph));
+        BFS();
+        System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
+       
+    }
+
+    public static void BFS() {
+        Queue<Node> q = new ArrayDeque<Node>();
+        q.offer(new Node(0,0,0,1));
+        visited[0][0] = true;
+        boolean flag = true; // true면 낮, false면 밤. 
+        
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+            System.out.println(cur);
+
+            if (cur.x == N-1 && cur.y == M-1) {
+                ans = cur.cnt;
+                return ;
+            }
+
+            for (int i=0; i<4; i++) {
+                int nx = cur.x + dx[i];
+                int ny = cur.y + dy[i];
+
+                if (check(nx,ny) && !visited[nx][ny]) {
+                    if (flag) { // 낮일 때 
+
+                        if (graph[nx][ny] == 1) {
+                            if (cur.wall < K) {
+                                q.offer(new Node(nx,ny,cur.wall+1,cur.cnt+1));
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                        else{
+                            q.offer(new Node(nx,ny,cur.wall,cur.cnt+1));
+                        }
+                        flag = false;
+                        visited[nx][ny] = true;
                     }
-                     
-                }
-            }
-             
-            min_v = Integer.MAX_VALUE;
-            maxCore = Integer.MIN_VALUE;
-             
-            DFS(0,0,0);
-             
-            sb.append("#"+t+" "+min_v+"\n");
-        }
-         
-        System.out.println(sb.toString());
-    }
-     
-    public static void DFS(int idx, int cnt, int wire) {
-
-        if(idx == coreList.size()) {  // 기저조건 
-            if(maxCore < cnt) { 
-                maxCore = cnt;
-                min_v = wire;
-            } else if(maxCore == cnt) { 
-                min_v = Math.min(wire, min_v);
-            }
-            return;
-        }
-         
-        int x = coreList.get(idx).x;
-        int y = coreList.get(idx).y;
-         
-        for(int dir=0; dir<4; dir++) {
-            int count=0, nx=x, ny=y;
-             
-            while(true) {
-                nx += dx[dir];
-                ny += dy[dir];
-                 
-                if(!check(nx,ny)) { // 범위 벗어나거나
-                    break;
-                }
-                 
-                if(cell[ny][nx] == 1) { // 중간에 코어 만날 때
-                    count = 0;
-                    break;
-                }
-                 
-                count++; // 정상적으로 연결됐을 때 
-            }
- 
-            int fill_x = x;
-            int fill_y = y;
-             
-            for(int i=0; i<count; i++) {
-                fill_x += dx[dir];
-                fill_y += dy[dir];
-                cell[fill_y][fill_x] = 1;
-            }
-             
-            if(count==0)
-                DFS(idx+1, cnt, wire);
-            else {
-                DFS(idx+1, cnt+1, wire+count);
-                 
-                fill_x = x; // 원래대로 되돌리기
-                fill_y = y;
-                 
-                for(int i=0; i<count; i++) {
-                    fill_x += dx[dir];
-                    fill_y += dy[dir];
-                    cell[fill_y][fill_x] = 0;
+                    else { // 밤일 때
+                        if (graph[nx][ny] == 1) {
+                            if (cur.wall < K) {
+                                q.offer(new Node(cur.x,cur.y,cur.wall,cur.cnt+1));
+                                visited[cur.x][cur.y] = false;
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                        else {
+                                q.offer(new Node(nx,ny,cur.wall,cur.cnt+1));
+                                visited[nx][ny] = true;
+                        }
+                        flag = true;
+                    }
                 }
             }
         }
     }
 
-    public static boolean check(int x, int y) {
-        if (0 <= x && x < N && 0 <=y && y <N)  return true;
+    public static boolean check(int x, int y){
+        if (0 <= x && x < N && 0 <= y && y < M) return true;
         else return false;
     }
 }
 
-class Core {
-    int x,y;  
-
-    public Core(int y, int x) {
-        this.y = y;
+class Node {
+    int x,y,wall,cnt;
+    public Node(int x, int y, int wall, int cnt) {
         this.x = x;
-    }   
+        this.y = y;
+        this.wall = wall;
+        this.cnt = cnt;
+    }
+
+    @Override
+    public String toString() {
+        return "Node [x=" + x + ", y=" + y + ", wall=" + wall + ", cnt=" + cnt + "]";
+    }
+    
 }
