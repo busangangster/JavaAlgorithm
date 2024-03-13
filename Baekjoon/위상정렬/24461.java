@@ -1,8 +1,9 @@
+package Baekjoon.위상정렬;
 import java.io.*;
 import java.util.*;
 
-public class prac { 
-	static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
+class P24461 {
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
 	static int N;
 	static int[] inDegrees; 
 	static ArrayList<Integer> ans = new ArrayList<>();
@@ -32,8 +33,6 @@ public class prac {
 
 		}
 
-		// System.out.println(Arrays.toString(inDegrees));
-		// System.out.println(graph);
 		ts();
 		Collections.sort(tmp);
 		for (int v:tmp) {
@@ -50,13 +49,10 @@ public class prac {
 				q.offer(i);
 			}
 		}
-		// System.out.println(q);
 
 		while (!q.isEmpty()) {
 
 			int t = q.size();
-			// System.out.println(t);
-			// System.out.println(q);
 
 			if (t <= 2) {
 				for (int i=0; i<t; i++) {
@@ -69,7 +65,6 @@ public class prac {
 							q.offer(next);
 						}
 					}
-	
 				}
 			}
 			else {
@@ -84,26 +79,6 @@ public class prac {
 					}
 				}
 			}
-
-			// System.out.println(Arrays.stream(inDegrees).sum());
-			// if (Arrays.stream(inDegrees).sum() == N) {
-			// 	int t = q.size();
-			// 	for (int i=0; i<t; i++) {
-			// 		ans.add(q.poll());
-			// 	}
-			// 	return;
-			// }
-			// System.out.println(q);
-			// int cur = q.poll();
-			
-
-			// for (int next: graph.get(cur)) {
-			// 	inDegrees[next]--;
-			// 	if (inDegrees[next] == 1) {
-			// 		q.offer(next);
-			// 	}
-			// }
-			// System.out.println(Arrays.toString(inDegrees));
 		}
 	}
 }
