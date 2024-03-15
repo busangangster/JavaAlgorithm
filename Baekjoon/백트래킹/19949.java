@@ -15,8 +15,6 @@ class P19949 {
 			nums[i] = Integer.parseInt(st.nextToken());
 		}
 
-		System.out.println(Arrays.toString(nums));
-
 		perm(0,0);
 		System.out.println(cnt);
 
@@ -25,7 +23,6 @@ class P19949 {
 	public static void perm(int count, int score) {
 		if (count == 10) {
 			if (score >= 5) cnt++;
-			// System.out.println("here");
 			return;
 			
 		}
