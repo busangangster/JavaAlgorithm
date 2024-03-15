@@ -1,8 +1,9 @@
+package Baekjoon.백트래킹;
 import java.io.*;
 import java.util.*;
 
-public class prac { 
-	static int[] nums = new int[10];
+class P19949 {
+    static int[] nums = new int[10];
 	static int[] ans = new int[10];
 	static int cnt;
 	public static void main(String[] args) throws Exception{
